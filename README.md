@@ -55,7 +55,7 @@ To set up the AWS Billing Analysis Tool, follow these steps:
    
    Run the rake rask to import data from the Parquet file into ClickHouse. Make sure the path to your Parquet file is correct. 
 
-   Note:  On my machine MacBook Air 2015 1.6 GHz Dual-Core Intel Core i5 it took 15-20 mins for the database to load ~110,000 records. In production, we could've used batching to make the inserts more efficient.
+   **Note:**  On my machine MacBook Air 2015 1.6 GHz Dual-Core Intel Core i5 it took me 15-20 mins for the database to load ~110,000 records. In production, we could've used batching to make the inserts more efficient.
    ```
    rails import:billing_data
    ```
@@ -67,6 +67,27 @@ To set up the AWS Billing Analysis Tool, follow these steps:
 
 5. **Access the Application:**
    Open a web browser and go to `http://localhost:3000` to access the application.
+
+## Viewing API Documentation
+
+API documentation for this project is generated using RSwag. Follow these steps to view the API documentation:
+
+![API Docs](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/API%20docs.png)
+
+1. **Start the Rails Server:**
+   Ensure your Rails server is running locally. If not, start it using:
+   ```
+   rails server
+   ```
+
+2. **Access the Swagger UI:**
+   Open a web browser and navigate to the Swagger UI endpoint:
+   ```
+   http://localhost:3000/api-docs/index.html
+   ```
+
+3. **Explore Endpoints:**
+   Once on the Swagger UI page, you can explore the available endpoints, parameters, request bodies, and responses. This interactive documentation provides a convenient way to understand and test the API functionalities.
 
 ## Assumptions
 
@@ -126,3 +147,9 @@ If dealing with a dataset 100x larger:
 
 3. **Instructions Feedback:**
    - The instructions were clear overall.
+
+![AWSDataTransfer](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AWSDataTransfer.png)
+![AWSGlue](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AWSGlue.png)
+![AmazonEC2](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonEC2.png)
+![AmazonGuardDuty](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonGuardDuty.png)
+![AmazonGuardDuty](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonS3.png)
