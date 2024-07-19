@@ -1,0 +1,103 @@
+<!-- app/views/costs/index.html.erb -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AWS Billing</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const services = ['AmazonS3', 'AmazonEC2', 'AWSDataTransfer', 'AWSGlue', 'AmazonGuardDuty'];
+
+      // Populate the dropdown with available services
+      const serviceSelect = document.getElementById('service-select');
+      services.forEach(service => {
+        const option = document.createElement('option');
+        option.value = service;
+        option.text = service;
+        serviceSelect.appendChild(option);
+      });
+
+      // Function to get the JWT token
+      function getToken(username, password) {
+        return fetch('/authenticate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: `username=${username}&password=${password}`
+        })
+        .then(response => response.json())
+        .then(data => data.token);
+      }
+
+      // Function to fetch and display data
+      function fetchData(token, service) {
+        fetch(`/costs/undiscounted/${service}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('undiscounted').innerText = `${service} Undiscounted Cost: $${data.undiscounted_cost}`;
+        });
+
+        fetch(`/costs/discounted/${service}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('discounted').innerText = `${service} Discounted Cost: $${data.discounted_cost}`;
+        });
+
+        fetch('/costs/blended_rate', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          const blendedRate = (data.blended_rate).toFixed(2); 
+          document.getElementById('blended_rate').innerText = `Blended Discount Rate: ${blendedRate}%`;
+        });
+      }
+
+      // Authenticate and fetch data when the service is selected
+      document.getElementById('fetch-button').addEventListener('click', function() {
+        const service = serviceSelect.value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        getToken(username, password)
+          .then(token => {
+            if (token) {
+              fetchData(token, service);
+            } else {
+              alert('Authentication failed!');
+            }
+          });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>AWS Billing</h1>
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username">
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password">
+  </div>
+  <div>
+    <label for="service-select">Select Service:</label>
+    <select id="service-select"></select>
+  </div>
+  <button id="fetch-button">Fetch Costs</button>
+  <p id="undiscounted">Undiscounted Cost: Loading...</p>
+  <p id="discounted">Discounted Cost: Loading...</p>
+  <p id="blended_rate">Blended Discount Rate: Loading...</p>
+</body>
+</html>

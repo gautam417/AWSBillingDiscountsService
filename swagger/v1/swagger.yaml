@@ -1,0 +1,114 @@
+openapi: 3.0.1
+info:
+  title: AWS CUR Billing Discounts API
+  version: 1.0.0
+paths:
+  /up:
+    get:
+      summary: Check Rails health
+      operationId: getHealth
+      tags:
+        - Health Check
+      responses:
+        '200':
+          description: OK
+  /authenticate:
+    post:
+      summary: Authenticate user
+      operationId: authenticateUser
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /costs/undiscounted/{service}:
+    get:
+      summary: Get undiscounted cost for a service
+      operationId: getUndiscountedCost
+      tags:
+        - Costs
+      parameters:
+        - name: service
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    type: string
+                  undiscounted_cost:
+                    type: number
+  /costs/discounted/{service}:
+    get:
+      summary: Get discounted cost for a service
+      operationId: getDiscountedCost
+      tags:
+        - Costs
+      parameters:
+        - name: service
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    type: string
+                  discounted_cost:
+                    type: number
+  /costs/blended_rate:
+    get:
+      summary: Get blended discount rate
+      operationId: getBlendedRate
+      tags:
+        - Costs
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  blended_rate:
+                    type: number
