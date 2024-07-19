@@ -148,8 +148,21 @@ If dealing with a dataset 100x larger:
 3. **Instructions Feedback:**
    - The instructions were clear overall.
 
-![AWSDataTransfer](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AWSDataTransfer.png)
-![AWSGlue](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AWSGlue.png)
-![AmazonEC2](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonEC2.png)
-![AmazonGuardDuty](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonGuardDuty.png)
-![AmazonGuardDuty](https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonS3.png)
+## Screenshots
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+  <div style="flex: 0 0 48%; margin: 1%;">
+    <img src="https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AWSDataTransfer.png?raw=true" alt="AWS Billing Data Transfer" style="width: 100%;">
+  </div>
+  <div style="flex: 0 0 48%; margin: 1%;">
+    <img src="https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AWSGlue.png?raw=true" alt="AWS Billing Glue" style="width: 100%;">
+  </div>
+  <div style="flex: 0 0 48%; margin: 1%;">
+    <img src="https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonEC2.png?raw=true" alt="AWS Billing EC2" style="width: 100%;">
+  </div>
+  <div style="flex: 0 0 48%; margin: 1%;">
+    <img src="https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonGuardDuty.png?raw=true" alt="AWS Billing GuardDuty" style="width: 100%;">
+  </div>
+  <div style="flex: 0 0 48%; margin: 1%;">
+    <img src="https://github.com/gautam417/AWSBillingDiscountsService/blob/main/AmazonS3.png?raw=true" alt="AWS Billing S3" style="width: 100%;">
+  </div>
+</div>
